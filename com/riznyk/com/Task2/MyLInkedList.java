@@ -1,18 +1,20 @@
 package com.riznyk.com.Task2;
 
 
+import java.util.Objects;
+
 public class MyLInkedList<T> {
     private Node<T> firstElement;
-    private Node<T> lastElement;
+    private  Node<T> lastElement;
     private int size;
 
-    static class Node<T> {
+      private  class Node<T> {
         T element;
         Node<T> next;
 
         public Node(T element) {
             this.element = element;
-
+            next = null;
         }
 
     }
@@ -20,43 +22,50 @@ public class MyLInkedList<T> {
 
     public void add(T element) {
         Node<T> newNode = new Node<>(element);
+        lastElement = firstElement;
         if (firstElement == null) {
-            firstElement = lastElement = newNode;
+            firstElement = newNode;
         } else {
-            lastElement.next = newNode;
-            lastElement = newNode;
-        }
-        size++;
+            while (lastElement.next != null){
+                lastElement = lastElement.next;
+            }
 
+            lastElement.next = newNode;
+        size++;
+        }
     }
 
     public T get(int index) {
-
+        Objects.checkIndex(index, size);
         return addMethod(index).element;
     }
+
 
     public int size() {
         return size;
     }
 
-    public T remove(int index) {
-        T rremElement;
-        if (index == 0) {
-            rremElement = firstElement.element;
-            firstElement = firstElement.next;
-            if (firstElement == null) {
-                lastElement = null;
+    public Object remove(int index) {
+         Node<T> node = firstElement;
+        Node<T> newNode = null;
+        T rremElement = null;
+        int counter = 0;
+        while (node != null) {
+            if (index == counter) {
+                if (node == firstElement) {
+                    rremElement = node.element;
+                    node = node.next;
+                    firstElement = node;
+                } else {
+                    newNode.next = node.next;
+                    rremElement = node.element;
+                }
             }
-        } else {
-            Node<T> rew = addMethod(index - 1);
-            rremElement = rew.next.element;
-            rew.next = rew.next.next;
-            if (index == size - 1) {
-                lastElement = rew;
-            }
+            newNode = node;
+            node = node.next;
+            counter++;
         }
-        size--;
-
+        counter--;
         return rremElement;
     }
 
@@ -65,7 +74,7 @@ public class MyLInkedList<T> {
         size = 0;
     }
 
-    // add method
+
     private Node<T> addMethod(int index) {
         Node<T> line = firstElement;
         for (int i = 0; i < index; i++) {

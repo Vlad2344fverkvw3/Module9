@@ -13,25 +13,26 @@ public class MyArrayList<T> {
     }
 
 
-    public Object[] add(Object value) {
-        int size = elements.length;
+    public Object[] add(String value) {
+         size = elements.length;
         size++;
         Object[] secondArray = Arrays.copyOf(elements, size);
         for (int i = elements.length; i < size; i++) {
             secondArray[i] = value;
         }
-        return elements = secondArray;
-    }
+         elements = secondArray;
+    return elements;}
     public int size() {
         return elements.length;
     }
 
     public T get(int index) {
+        Objects.checkIndex(index, size);
         return (T) elements[index];
     }
 
     public Object[] remove(int index) {
-        int size = elements.length;
+         size = elements.length;
         size--;
         int element = 0;
         Object[] secondArray = new Object[size];
@@ -42,8 +43,8 @@ public class MyArrayList<T> {
             secondArray[i] = elements[element];
             element++;
         }
-        return elements = secondArray;
-    }
+         elements = secondArray;
+    return elements;}
 
 
 

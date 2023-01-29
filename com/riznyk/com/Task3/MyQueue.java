@@ -1,11 +1,6 @@
 package com.riznyk.com.Task3;
 
 
-import com.riznyk.com.Task2.MyLInkedList;
-
-
-import java.util.Queue;
-
 public class MyQueue<T> {
     private Node<T> firstElement;
     private Node<T> lastElement;
@@ -67,15 +62,6 @@ public T poll(){
         size--;
         return value;
 }
-
-    // add method
-    private Node<T> addMethod(int index) {
-        Node<T> line = firstElement;
-        for (int i = 0; i < index; i++) {
-            line = line.next;
-        }
-        return line;
-    }
 
 
     @Override
